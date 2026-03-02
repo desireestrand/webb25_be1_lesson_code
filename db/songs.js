@@ -1,4 +1,5 @@
 import fs from "fs/promises"
+import { getAllArtists } from "./artists.js"
 
 const DATA_PATH = new URL("../data/songs.json", import.meta.url)
 
@@ -27,8 +28,28 @@ async function writeSongs(songs = []) {
 
 export async function getSongByid(id) {
   const _songs = await readSongs()
-  console.log(id)
-  return _songs.find((song) => song.id === id) || null
+  const _artists = await getAllArtists()
+
+  const _song = _songs.find((song) => song.id === Number(id))
+
+  if (!_song) {
+    return null;
+  }
+
+  const _artist = _artists.find((a) => a.name === _song.artist)
+
+  if (!_artist) {
+    throw new Error(`Artist ${_song.artist} could not be found.`);
+  }
+
+  return {
+    id: _song.id,
+    title: _song.title,
+    artist: {
+        id: _artist.id,
+        name: _artist.name
+        }
+    }
 }
 
 export async function createSong(data) {

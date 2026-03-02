@@ -7,6 +7,7 @@ import {
   updateSong,
   deleteSong,
 } from "../db/songs.js"
+import { getAllArtists } from "../db/artists.js"
 const songRouter = Router()
 
 /* let songs = [
@@ -22,20 +23,21 @@ const songRouter = Router()
 //B2
 songRouter.get("/", async (req, res) => {
   const songs = await getAllSongs()
-  const { q, artist, sort, limit } = req.query
+  const artists = await getAllArtists();
+  const { q, artist, sort, limit, "with-author": withAuthor } = req.query
 
   let filteredSongs = songs.filter((song) => !song.deleted)
 
   if (q) {
     const lowerQ = q.toLowerCase()
-    filteredSongs = songs.filter(
+    filteredSongs = filteredSongs.filter(
       (song) =>
         song.title.toLowerCase().includes(lowerQ) ||
         song.artist.toLowerCase().includes(lowerQ),
     )
   }
   if (artist) {
-    filteredSongs = songs.filter(
+    filteredSongs = filteredSongs.filter(
       (song) => song.artist.toLowerCase() === artist.toLowerCase(),
     )
   }
@@ -60,6 +62,21 @@ songRouter.get("/", async (req, res) => {
     filteredSongs = filteredSongs.slice(0, limitNum)
   }
 
+  if (withAuthor === "true" || withAuthor === "1") {
+    filteredSongs = filteredSongs.map((song) => {
+      const _artist = artists.find((a) => a.name === song.artist);
+
+      return {
+        id: song.id,
+        title: song.title,
+        artist: {
+            id: _artist.id,
+            name: _artist.name
+            }
+        }
+    })
+  }
+
   return res.json(filteredSongs)
 })
 
@@ -82,6 +99,8 @@ songRouter.get("/:id", async (req, res) => {
 
 songRouter.post("/", async (req, res) => {
   const { title, artist } = req.body
+  const artists = await getAllArtists();
+
   if (
     !title ||
     typeof title !== "string" ||
@@ -92,8 +111,16 @@ songRouter.post("/", async (req, res) => {
       message: "Title and artist are required",
     })
   }
+
+  const artistExists = artists.find((a) => a.name.toLowerCase() === artist.toLowerCase())
+
+  if (!artistExists) {
+    return res.status(400).json({
+      message: `Artist does not exist. You must create the artist first.`,
+    })
+  }
   //const lastId = Math.max(...songs.map((song) => song.id))
-  const song = await createSong({ title, artist })
+  const song = await createSong({ title, artist: artistExists.name })
 
   return res.status(201).json(song)
 })
