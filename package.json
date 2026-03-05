@@ -7,7 +7,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "teardown": "node scripts/teardown.js",
+    "seed": "node scripts/seed.js",
+    "dev:clean": "npm run teardown && npm run seed && npm run start"
   },
   "repository": {
     "type": "git",
@@ -22,7 +25,8 @@
   "dependencies": {
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "mongoose": "^9.2.4"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"

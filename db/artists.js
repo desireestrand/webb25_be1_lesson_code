@@ -1,89 +1,57 @@
-import fs from "fs/promises"
+import Artist from "../models/Artist.js";
+import { getFullTextSearch } from "../utils/fullTextSearch.js";
 
-const DATA_PATH = new URL("../data/artists.json", import.meta.url)
-
-/* let artists = [
-//   { id: 1, name: 'Bad Bunny' },
-  { id: 2, name: 'Zara Larsson' },
-  { id: 3, name: 'Radiohead' },
-];
- */
-
-async function readArtists() {
-  try {
-    const file = await fs.readFile(DATA_PATH, "utf8")
-    const artistsJSON = file.toString()
-    const artists = JSON.parse(artistsJSON)
-    if (!Array.isArray(artists)) {
-      throw new Error("Artists is not in an array")
+export async function getAllArtists(q) {
+  let filter = { }
+  if (q) {
+    filter = {
+      ...filter,
+      ...getFullTextSearch(q, true, "name"),
     }
-    return artists
-  } catch (err) {
-    console.log("Unable to read from 'data/artists.json'", err)
-    return []
   }
-}
-
-async function writeArtists(artists = []) {
-  const artistsJSON = JSON.stringify(artists, null, 2)
+  console.log(filter)
   try {
-    await fs.writeFile(DATA_PATH, artistsJSON)
+    return await Artist.find(filter);
   } catch (err) {
-    console.log("Unable to write to 'data/artists.json'", err)
-  }
-}
-
-export async function getAllArtists() {
-  const _artists = await readArtists()
-  return _artists
+    console.error("Unable to read from 'Artists'", err)
+    return []
+  } 
 }
 
 export async function getArtistByid(id) {
-  const _artists = await readArtists()
-  return _artists.find((artist) => artist.id === id) || null
+  try {
+    return await Artist.findById(id);
+  } catch (err) {
+    console.error("Unable to read from 'Artist'", err)
+    return null
+  }
 }
 
 export async function createArtist(data) {
-  const _artists = await readArtists()
-  const lastId = Math.max(..._artists.map((a) => a.id)) || 0
-  const newArtist = {
-    ...data,
-    id: lastId + 1,
-  }
-  _artists.push(newArtist)
-
-  await writeArtists(_artists)
-
-  return newArtist
+  try {
+    return await Artist.create(data);
+  } catch (err) {
+    console.error("Unable to create 'Artist'", err)
+    return null
+  } 
 }
 
 export async function updateArtist(id, data) {
-  let _artists = await readArtists()
-  let artist = _artists.find((a) => a.id === id)
-  if (!artist) return null
-  artist = {
-    ...artist,
-    ...data,
+  try {
+    const updatedArtist = await Artist.findByIdAndUpdate(id, data, { returnDocument: "after" });
+    if (!updatedArtist) return null;
+    return updatedArtist;
+  } catch (err) {
+    console.error("Unable to update 'Artist'", err)
+    return null
   }
-  _artists = _artists.map((a) => {
-    if (a.id === artist.id) {
-      console.log("entered found id")
-      return artist
-    }
-    console.log("not found id")
-    return a
-  })
-  await writeArtists(_artists)
-  return artist
 }
 
 export async function deleteArtist(id) {
-  let _artists = await readArtists()
-  const artistIndex = _artists.findIndex(
-    (artist) => artist.id === id && !artist.deleted,
-  )
-  if (artistIndex === -1) return false
-  _artists.splice(artistIndex, 1)
-  await writeArtists(_artists)
-  return true
+  try {
+    return !!(await Artist.findByIdAndDelete(id));
+  } catch (err) {
+    console.error("Unable to delete 'Artist'", err)
+    return false
+  }
 }

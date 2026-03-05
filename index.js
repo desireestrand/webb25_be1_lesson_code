@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from "cors"
 import artistRouter from "./routes/artists.js"
 import songRouter from "./routes/songs.js"
+import { connectToDb, disconnectFromDb } from "./config/db.js";
 
 dotenv.config();
 
@@ -21,10 +22,19 @@ app.use("/api/artists", artistRouter)
 app.use("/api/songs", songRouter)
 const PORT = process.env.PORT || 3000
 
-app.listen(PORT,(error) => {
-    if(error) {
-        console.log("Error in running express", error.message)
-        return
-    }
-    console.log(`Server is running on port ${PORT}`)
-})
+// Start server only after DB connection
+connectToDb("sqotifyv2")
+    .then(() => {
+        app.listen(PORT, (error) => {
+            if (error) {
+                console.warn("Error in running express", error.message)
+                throw new Error(error.message)
+            }
+            console.info(`Server is running on port ${PORT}`)
+        })
+
+    }).catch((error) => {
+        console.error("Error connecting to database", error)
+        disconnectFromDb()
+        throw new Error(error.message)
+    })
