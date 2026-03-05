@@ -1,7 +1,6 @@
 import { connectToDb } from "./connect.js"
 import Artist from "./models/Artist.js"
 
-
 async function main() {
     try {
         await connectToDb('lesson_3')

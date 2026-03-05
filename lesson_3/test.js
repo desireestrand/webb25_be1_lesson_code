@@ -1,31 +1,44 @@
-import Artist from "./models/Artist";
+import { connectToDb } from "./connect.js"
+import mongoose from "mongoose"
+import Artist from "./models/Artist.js"
 
-export async function getAllArtists() {
-    return await Artist.find();
+async function main() {
+    try {
+        await connectToDb('test')
+
+        await Artist.deleteMany({})
+
+        const artistData = [
+            {name: "Charli XCX"},
+            {name: "Ethel Cain"},
+            {name: "Bad Bunny"},
+            {name: "The Weeknd"},
+            {name: "Haim"},
+            {name: "Harry Styles"}
+        ]
+
+        await Artist.insertMany(artistData)
+
+        console.log("Created artists", artistData)
+
+        const getAllArtists = await Artist.find()
+        console.log("Artists", getAllArtists)
+
+        const updateArtist = await Artist.findOneAndUpdate({ name: "Charli XCX"}, { name: "Charlotte Perelli"}, {new: true})
+        console.log("Updated artist", updateArtist)
+
+        const deleteArtist = await Artist.deleteOne({ name: "Bad Bunny"});
+        console.log("Deleted artist", deleteArtist);
+
+        const filterArtist = await Artist.find({ name: /we/i })
+        console.log("Filtered artists", filterArtist)
+
+
+    } catch(error) {
+        console.warn("Unable to connect to mongo.db ", error)
+    }
+
+    await mongoose.disconnect()
 }
 
-export async function getArtistById(id) {
-    const artist = await Artist.findById(id);
-    return artist || null;
-}
-
-export async function createArtist(name) {
-    const artist = new Artist({ name });
-    await artist.save();
-    return artist;
-}
-
-export async function updateArtist(id, name) {
-    const artist = await Artist.findById(id);
-    if (!artist) return null;
-
-    artist.name = name;
-    await artist.save();
-
-    return artist;
-}
-
-export async function deleteArtist(id) {
-    const result = await Artist.deleteOne({ _id : id });
-    return result.deletedCount === 1;
-}
+main()
