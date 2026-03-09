@@ -2,7 +2,7 @@ import Song from "../models/Song.js";
 import { getFullTextSearch } from "../utils/fullTextSearch.js";
 
 export async function getAllSongs(q) {
-  let filter = { }
+  let filter = {}
   if (q) {
     filter = {
       ...filter,
@@ -28,9 +28,9 @@ export async function getSongByid(id) {
 
 export async function createSong(data) {
   try {
-    const newSong = (await Song.create(data))
-    const fetchedSong = await Song.findById(newSong._id).populate("artist").populate("album", "title");
-    return fetchedSong
+    const newSong = new Song(data)
+    await newSong.save()
+    return await Song.populate(newSong, "artist album")
   } catch (err) {
     console.error("Unable to create 'Song'", err)
     return null
@@ -39,8 +39,12 @@ export async function createSong(data) {
 
 export async function updateSong(id, data) {
   try {
-    const updatedSong = await Song.findByIdAndUpdate(id, data, { new: true }).populate("artist").populate("album", "title");
-    return updatedSong
+    const updatedSong = await Song.findById(id)
+    updatedSong.title = data.title ?? updatedSong.title
+    updatedSong.artist = data.artist ?? updatedSong.artist
+    updatedSong.album = data.album ?? updatedSong.album
+    await updatedSong.save()
+    return await Song.populate(updatedSong, "artist album")
   } catch (err) {
     console.error("Unable to update 'Song'", err)
     return null
