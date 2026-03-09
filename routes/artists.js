@@ -27,12 +27,19 @@ artistRouter.get("/:id", async (req, res) => {
 
 artistRouter.post("/", async (req, res) => {
   const { name } = req.body
-  if (!name || typeof name !== "string") {
+  const hasName = name && typeof name === "string"
+  if (!hasName) {
     return res.status(400).json({
       message: "Name is required",
     })
   }
   const artist = await createArtist({ name })
+
+  if(!artist) {
+    return res.status(409).json({
+      message: `Artist with name '${name}' allready exists`,
+    })
+  }
 
   return res.status(201).json(artist)
 })
@@ -40,7 +47,9 @@ artistRouter.post("/", async (req, res) => {
 artistRouter.put("/:id", async (req, res) => {
   const id = req.params.id
   const { name } = req.body
-  if (!name || typeof name !== "string") {
+
+  const hasName = name && typeof name === "string"
+  if (!hasName) {
     return res.status(400).json({
       message: "New artist name is required",
     })

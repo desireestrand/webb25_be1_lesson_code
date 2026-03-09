@@ -1,44 +1,250 @@
 [
-  { "_id": "69a896ef1b396e2d9ab8c644", "title": "DtMF", "artist": "Bad Bunny" },
-  { "_id": "69a896ef1b396e2d9ab8c645", "title": "NUEVAYoL", "artist": "Bad Bunny" },
-  { "_id": "69a896ef1b396e2d9ab8c646", "title": "Stateside + Zara Larsson", "artist": "PinkPantheress" },
-  { "_id": "69a896ef1b396e2d9ab8c647", "title": "BAILE INoLVIDABLE", "artist": "Bad Bunny" },
-  { "_id": "69a896ef1b396e2d9ab8c648", "title": "Opalite", "artist": "Taylor Swift" },
-  { "_id": "69a896ef1b396e2d9ab8c649", "title": "Fame Is a Gun", "artist": "Addison Rae" },
-  { "_id": "69a896ef1b396e2d9ab8c64a", "title": "VOY A LLeVARTE PA PR", "artist": "Bad Bunny" },
-  { "_id": "69a896ef1b396e2d9ab8c64b", "title": "EoO", "artist": "Bad Bunny" },
-  { "_id": "69a896ef1b396e2d9ab8c64c", "title": "Aperture", "artist": "Harry Styles" },
-  { "_id": "69a896ef1b396e2d9ab8c64d", "title": "Sienna", "artist": "The Marías" },
-  { "_id": "69a896ef1b396e2d9ab8c64e", "title": "WILDFLOWER", "artist": "Billie Eilish" },
-  { "_id": "69a896ef1b396e2d9ab8c64f", "title": "The Less I Know the Better", "artist": "Tame Impala" },
-  { "_id": "69a896ef1b396e2d9ab8c650", "title": "Lush Life", "artist": "Zara Larsson" },
-  { "_id": "69a896ef1b396e2d9ab8c651", "title": "Creep", "artist": "Radiohead" },
-  { "_id": "69a896ef1b396e2d9ab8c652", "title": "Tears", "artist": "Sabrina Carpenter" },
-  { "_id": "69a896ef1b396e2d9ab8c653", "title": "4 Raws", "artist": "EsDeeKid" },
-  { "_id": "69a896ef1b396e2d9ab8c654", "title": "VeLDÁ", "artist": "Bad Bunny" },
-  { "_id": "69a896ef1b396e2d9ab8c655", "title": "BIRDS OF A FEATHER", "artist": "Billie Eilish" },
-  { "_id": "69a896ef1b396e2d9ab8c656", "title": "I Thought I Saw Your Face Today", "artist": "She & Him" },
-  { "_id": "69a896ef1b396e2d9ab8c657", "title": "luther (with SZA)", "artist": "Kendrick Lamar" },
-  { "_id": "69a896ef1b396e2d9ab8c658", "title": "Let Down", "artist": "Radiohead" },
-  { "_id": "69a896ef1b396e2d9ab8c659", "title": "Dracula", "artist": "Tame Impala" },
-  { "_id": "69a896ef1b396e2d9ab8c65a", "title": "WELTiTA", "artist": "Bad Bunny" },
-  { "_id": "69a896ef1b396e2d9ab8c65b", "title": "505", "artist": "Arctic Monkeys" },
-  { "_id": "69a896ef1b396e2d9ab8c65c", "title": "Gabriela", "artist": "KATSEYE" },
-  { "_id": "69a896ef1b396e2d9ab8c65d", "title": "PIXELATED KISSES", "artist": "PinkPantheress" },
-  { "_id": "69a896ef1b396e2d9ab8c65e", "title": "Tití Me Preguntó", "artist": "Bad Bunny" },
-  { "_id": "69a896ef1b396e2d9ab8c65f", "title": "PERFuMITO NUEVO", "artist": "Bad Bunny" },
-  { "_id": "69a896ef1b396e2d9ab8c660", "title": "Flashing Lights", "artist": "Taylor Swift" },
-  { "_id": "69a896ef1b396e2d9ab8c661", "title": "Duvet", "artist": "Addison Rae" },
-  { "_id": "69a896ef1b396e2d9ab8c662", "title": "Lovers Rock", "artist": "Djo" },
-  { "_id": "69a896ef1b396e2d9ab8c663", "title": "Espresso", "artist": "Sabrina Carpenter" },
-  { "_id": "69a896ef1b396e2d9ab8c664", "title": "Sports car", "artist": "Sabrina Carpenter" },
-  { "_id": "69a896ef1b396e2d9ab8c665", "title": "LAST OF A DYING BREED", "artist": "PinkPantheress" },
-  { "_id": "69a896ef1b396e2d9ab8c666", "title": "KLOuFRENS", "artist": "Bad Bunny" },
-  { "_id": "69a896ef1b396e2d9ab8c667", "title": "The Subway", "artist": "PinkPantheress" },
-  { "_id": "69a896ef1b396e2d9ab8c668", "title": "E85", "artist": "Olivia Dean" },
-  { "_id": "69a896ef1b396e2d9ab8c669", "title": "Von dutch", "artist": "RAYE" },
-  { "_id": "69a896ef1b396e2d9ab8c66a", "title": "Lover, You Should've Come Over", "artist": "Jeff Buckley" },
-  { "_id": "69a896ef1b396e2d9ab8c66b", "title": "Anti-Hero (Acoustic)", "artist": "Taylor Swift" },
-  { "_id": "69a896ef1b396e2d9ab8c66c", "title": "What Was I Made For?", "artist": "Addison Rae" },
-  { "_id": "69a896ef1b396e2d9ab8c66d", "title": "HUMBLE.", "artist": "Zara Larsson" }
+  {
+    "_id": "69a896ef1b396e2d9ab8c644",
+    "title": "DtMF",
+    "artist": "69a893ba5c0dfc919d16c17b",
+    "album": "67c86a245c0dfc919d16d002"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c645",
+    "title": "NUEVAYoL",
+    "artist": "69a893ba5c0dfc919d16c17b",
+    "album": "67c86a245c0dfc919d16d002"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c646",
+    "title": "Stateside + Zara Larsson",
+    "artist": "69a893ba5c0dfc919d16c17c",
+    "album": "67c86a245c0dfc919d16d003"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c647",
+    "title": "BAILE INoLVIDABLE",
+    "artist": "69a893ba5c0dfc919d16c17b",
+    "album": "67c86a245c0dfc919d16d001"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c648",
+    "title": "Opalite",
+    "artist": "69a893ba5c0dfc919d16c17d",
+    "album": "67c86a245c0dfc919d16d004"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c649",
+    "title": "Fame Is a Gun",
+    "artist": "69a893ba5c0dfc919d16c17e",
+    "album": "67c86a245c0dfc919d16d005"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c64a",
+    "title": "VOY A LLeVARTE PA PR",
+    "artist": "69a893ba5c0dfc919d16c17b",
+    "album": "67c86a245c0dfc919d16d002"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c64b",
+    "title": "EoO",
+    "artist": "69a893ba5c0dfc919d16c17b",
+    "album": "67c86a245c0dfc919d16d002"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c64c",
+    "title": "Aperture",
+    "artist": "69a893ba5c0dfc919d16c187",
+    "album": "67c86a245c0dfc919d16d006"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c64d",
+    "title": "Sienna",
+    "artist": "69a893ba5c0dfc919d16c185",
+    "album": "67c86a245c0dfc919d16d007"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c64e",
+    "title": "WILDFLOWER",
+    "artist": "69a893ba5c0dfc919d16c188",
+    "album": "67c86a245c0dfc919d16d008"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c64f",
+    "title": "The Less I Know the Better",
+    "artist": "69a893ba5c0dfc919d16c189",
+    "album": "67c86a245c0dfc919d16d009"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c650",
+    "title": "Lush Life",
+    "artist": "69a893ba5c0dfc919d16c183",
+    "album": "67c86a245c0dfc919d16d00a"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c651",
+    "title": "Creep",
+    "artist": "69a893ba5c0dfc919d16c18a",
+    "album": "67c86a245c0dfc919d16d00b"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c652",
+    "title": "Tears",
+    "artist": "69a893ba5c0dfc919d16c180",
+    "album": "67c86a245c0dfc919d16d00c"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c653",
+    "title": "4 Raws",
+    "artist": "69a893ba5c0dfc919d16c18b",
+    "album": "67c86a245c0dfc919d16d00d"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c654",
+    "title": "VeLDÁ",
+    "artist": "69a893ba5c0dfc919d16c17b",
+    "album": "67c86a245c0dfc919d16d00e"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c655",
+    "title": "BIRDS OF A FEATHER",
+    "artist": "69a893ba5c0dfc919d16c188",
+    "album": "67c86a245c0dfc919d16d00f"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c656",
+    "title": "I Thought I Saw Your Face Today",
+    "artist": "69a893ba5c0dfc919d16c18c",
+    "album": "67c86a245c0dfc919d16d010"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c657",
+    "title": "luther (with SZA)",
+    "artist": "69a893ba5c0dfc919d16c18d",
+    "album": "67c86a245c0dfc919d16d011"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c658",
+    "title": "Let Down",
+    "artist": "69a893ba5c0dfc919d16c18a",
+    "album": "67c86a245c0dfc919d16d012"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c659",
+    "title": "Dracula",
+    "artist": "69a893ba5c0dfc919d16c189",
+    "album": "67c86a245c0dfc919d16d013"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c65a",
+    "title": "WELTiTA",
+    "artist": "69a893ba5c0dfc919d16c17b",
+    "album": "67c86a245c0dfc919d16d014"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c65b",
+    "title": "505",
+    "artist": "69a893ba5c0dfc919d16c18e",
+    "album": "67c86a245c0dfc919d16d015"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c65c",
+    "title": "Gabriela",
+    "artist": "69a893ba5c0dfc919d16c18f",
+    "album": "67c86a245c0dfc919d16d016"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c65d",
+    "title": "PIXELATED KISSES",
+    "artist": "69a893ba5c0dfc919d16c17c",
+    "album": "67c86a245c0dfc919d16d017"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c65e",
+    "title": "Tití Me Preguntó",
+    "artist": "69a893ba5c0dfc919d16c17b",
+    "album": "67c86a245c0dfc919d16d018"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c65f",
+    "title": "PERFuMITO NUEVO",
+    "artist": "69a893ba5c0dfc919d16c17b",
+    "album": "67c86a245c0dfc919d16d019"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c660",
+    "title": "Flashing Lights",
+    "artist": "69a893ba5c0dfc919d16c17d"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c661",
+    "title": "Duvet",
+    "artist": "69a893ba5c0dfc919d16c17e"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c662",
+    "title": "Lovers Rock",
+    "artist": "69a893ba5c0dfc919d16c17f"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c663",
+    "title": "Espresso",
+    "artist": "69a893ba5c0dfc919d16c180",
+    "album": "67c86a245c0dfc919d16d01a"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c664",
+    "title": "Sports car",
+    "artist": "69a893ba5c0dfc919d16c180",
+    "album": "67c86a245c0dfc919d16d01b"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c665",
+    "title": "LAST OF A DYING BREED",
+    "artist": "69a893ba5c0dfc919d16c17c",
+    "album": "67c86a245c0dfc919d16d01c"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c666",
+    "title": "KLOuFRENS",
+    "artist": "69a893ba5c0dfc919d16c17b",
+    "album": "67c86a245c0dfc919d16d01d"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c667",
+    "title": "The Subway",
+    "artist": "69a893ba5c0dfc919d16c17c",
+    "album": "67c86a245c0dfc919d16d01e"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c668",
+    "title": "E85",
+    "artist": "69a893ba5c0dfc919d16c181"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c669",
+    "title": "Von dutch",
+    "artist": "69a893ba5c0dfc919d16c182",
+    "album": "67c86a245c0dfc919d16d01f"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c66a",
+    "title": "Lover, You Should've Come Over",
+    "artist": "69a893ba5c0dfc919d16c197",
+    "album": "67c86a245c0dfc919d16d020"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c66b",
+    "title": "Anti-Hero (Acoustic)",
+    "artist": "69a893ba5c0dfc919d16c17d",
+    "album": "67c86a245c0dfc919d16d021"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c66c",
+    "title": "What Was I Made For?",
+    "artist": "69a893ba5c0dfc919d16c17e",
+    "album": "67c86a245c0dfc919d16d022"
+  },
+  {
+    "_id": "69a896ef1b396e2d9ab8c66d",
+    "title": "HUMBLE.",
+    "artist": "69a893ba5c0dfc919d16c183",
+    "album": "67c86a245c0dfc919d16d023"
+  }
 ]

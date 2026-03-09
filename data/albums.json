@@ -1,0 +1,194 @@
+[
+  {
+    "_id": "67c86a245c0dfc919d16d001",
+    "artist": "69a893ba5c0dfc919d16c17b",
+    "title": "Un Verano Sin Ti",
+    "releaseDate": "2022-05-06"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d002",
+    "artist": "69a893ba5c0dfc919d16c17b",
+    "title": "Nadie Sabe Lo Que Va a Pasar Mañana",
+    "releaseDate": "2023-10-13"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d003",
+    "artist": "69a893ba5c0dfc919d16c17c",
+    "title": "Heaven knows",
+    "releaseDate": "2023-11-10"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d004",
+    "artist": "69a893ba5c0dfc919d16c17d",
+    "title": "The Tortured Poets Department",
+    "releaseDate": "2024-04-19"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d005",
+    "artist": "69a893ba5c0dfc919d16c17e",
+    "title": "AR",
+    "releaseDate": "2024-03-22"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d006",
+    "artist": "69a893ba5c0dfc919d16c17f",
+    "title": "DECIDE",
+    "releaseDate": "2022-09-16"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d007",
+    "artist": "69a893ba5c0dfc919d16c180",
+    "title": "Short n' Sweet",
+    "releaseDate": "2024-08-23"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d008",
+    "artist": "69a893ba5c0dfc919d16c181",
+    "title": "Messy",
+    "releaseDate": "2023-06-30"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d009",
+    "artist": "69a893ba5c0dfc919d16c182",
+    "title": "My 21st Century Blues",
+    "releaseDate": "2023-02-03"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d00a",
+    "artist": "69a893ba5c0dfc919d16c183",
+    "title": "Venus",
+    "releaseDate": "2024-02-09"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d00b",
+    "artist": "69a893ba5c0dfc919d16c184",
+    "title": "Soft Focus",
+    "releaseDate": "2024-05-17"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d00c",
+    "artist": "69a893ba5c0dfc919d16c185",
+    "title": "Cinema",
+    "releaseDate": "2021-06-25"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d00d",
+    "artist": "69a893ba5c0dfc919d16c186",
+    "title": "The Rise and Fall of a Midwest Princess",
+    "releaseDate": "2024-09-13"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d00e",
+    "artist": "69a893ba5c0dfc919d16c187",
+    "title": "Harry's House",
+    "releaseDate": "2022-05-20"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d00f",
+    "artist": "69a893ba5c0dfc919d16c188",
+    "title": "HIT ME HARD AND SOFT",
+    "releaseDate": "2024-05-17"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d010",
+    "artist": "69a893ba5c0dfc919d16c189",
+    "title": "Currents",
+    "releaseDate": "2015-07-17"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d011",
+    "artist": "69a893ba5c0dfc919d16c189",
+    "title": "The Slow Rush",
+    "releaseDate": "2020-02-14"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d012",
+    "artist": "69a893ba5c0dfc919d16c18a",
+    "title": "Pablo Honey",
+    "releaseDate": "1993-02-22"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d013",
+    "artist": "69a893ba5c0dfc919d16c18a",
+    "title": "OK Computer",
+    "releaseDate": "1997-05-21"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d014",
+    "artist": "69a893ba5c0dfc919d16c18b",
+    "title": "Soundcheck",
+    "releaseDate": "2024-08-02"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d015",
+    "artist": "69a893ba5c0dfc919d16c18c",
+    "title": "Volume One",
+    "releaseDate": "2008-03-18"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d016",
+    "artist": "69a893ba5c0dfc919d16c18c",
+    "title": "The Glorious Dawn",
+    "releaseDate": "2025-02-14"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d017",
+    "artist": "69a893ba5c0dfc919d16c18d",
+    "title": "Favourite Worst Nightmare",
+    "releaseDate": "2007-04-23"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d018",
+    "artist": "69a893ba5c0dfc919d16c18f",
+    "title": "KATSEYE",
+    "releaseDate": "2025-01-24"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d019",
+    "artist": "69a893ba5c0dfc919d16c190",
+    "title": "Nectar",
+    "releaseDate": "2020-09-25"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d01a",
+    "artist": "69a893ba5c0dfc919d16c191",
+    "title": "Graduation",
+    "releaseDate": "2007-09-11"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d01b",
+    "artist": "69a893ba5c0dfc919d16c192",
+    "title": "Twilight",
+    "releaseDate": "1998-01-28"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d01c",
+    "artist": "69a893ba5c0dfc919d16c193",
+    "title": "French Exit",
+    "releaseDate": "2014-09-23"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d01d",
+    "artist": "69a893ba5c0dfc919d16c194",
+    "title": "Think Later",
+    "releaseDate": "2023-12-08"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d01e",
+    "artist": "69a893ba5c0dfc919d16c194",
+    "title": "Hardstone Psycho",
+    "releaseDate": "2024-08-16"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d01f",
+    "artist": "69a893ba5c0dfc919d16c195",
+    "title": "Brat",
+    "releaseDate": "2024-06-14"
+  },
+  {
+    "_id": "67c86a245c0dfc919d16d020",
+    "artist": "69a893ba5c0dfc919d16c196",
+    "title": "Grace",
+    "releaseDate": "1994-08-23"
+  }
+]

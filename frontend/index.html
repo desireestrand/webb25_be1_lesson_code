@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sqotify</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Sqotify</h1>
+    <nav>
+      <button data-section="artists" class="active">Artists</button>
+      <button data-section="songs">Songs</button>
+      <button data-section="albums">Albums</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="artists" class="panel active">
+      <div class="toolbar">
+        <input type="search" id="artists-search" placeholder="Search artists…">
+        <button id="artist-add">Add artist</button>
+      </div>
+      <div id="artists-list" class="list"></div>
+    </section>
+
+    <section id="songs" class="panel">
+      <div class="toolbar">
+        <input type="search" id="songs-search" placeholder="Search songs…">
+        <button id="song-add">Add song</button>
+      </div>
+      <div id="songs-list" class="list"></div>
+    </section>
+
+    <section id="albums" class="panel">
+      <div class="toolbar">
+        <input type="search" id="albums-search" placeholder="Search albums…">
+        <button id="album-add">Add album</button>
+      </div>
+      <div id="albums-list" class="list"></div>
+    </section>
+  </main>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <h2 id="modal-title">Edit</h2>
+      <form id="modal-form"></form>
+      <div class="modal-actions">
+        <button type="button" id="modal-cancel">Cancel</button>
+        <button type="submit" form="modal-form" id="modal-submit">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -28,9 +28,7 @@ songRouter.get("/:id", async (req, res) => {
 })
 
 songRouter.post("/", async (req, res) => {
-  const { title, artist } = req.body
-  const artists = await getAllArtists();
-
+  const { title, artist, album } = req.body
   if (
     !title ||
     typeof title !== "string" ||
@@ -41,7 +39,9 @@ songRouter.post("/", async (req, res) => {
       message: "Title and artist are required",
     })
   }
-  const song = await createSong({ title, artist })
+  const data = { title, artist }
+  if (album) data.album = album
+  const song = await createSong(data)
 
   return res.status(201).json(song)
 })
@@ -49,14 +49,21 @@ songRouter.post("/", async (req, res) => {
 songRouter.put("/:id", async (req, res) => {
   const id = req.params.id
 
-  const { title, artist } = req.body
-  if (!title || typeof title !== "string" || !artist || typeof artist !== "string") {
+  const { title, artist, album } = req.body
+  if (
+    !title ||
+    typeof title !== "string" ||
+    !artist ||
+    typeof artist !== "string"
+  ) {
     return res.status(400).json({
       message: "New song title and artist are required",
     })
   }
 
-  const song = await updateSong(id, { title, artist })
+  const data = { title, artist }
+  if (album !== undefined) data.album = album || null
+  const song = await updateSong(id, data)
   if (!song) {
     return res.status(404).json({
       message: "Song does not exist",
