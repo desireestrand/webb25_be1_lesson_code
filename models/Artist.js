@@ -18,6 +18,14 @@ artistSchema.pre("save", function(next) {
   return next
 })
 
+artistSchema.pre("deleteOne", 
+  {query: true}, 
+  async function(doc) {
+    const {_id} = this.getFilter()
+  await mongoose.model('Song').deleteMany({ artist: _id })
+  await mongoose.model('Album').deleteMany({ artist: _id })
+})
+
 const Artist = mongoose.model("Artist", artistSchema);
 
 export default Artist;

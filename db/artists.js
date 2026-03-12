@@ -1,4 +1,3 @@
-import slugify from "slugify";
 import Artist from "../models/Artist.js";
 import { getFullTextSearch } from "../utils/fullTextSearch.js";
 
@@ -54,7 +53,10 @@ export async function updateArtist(id, data) {
 
 export async function deleteArtist(id) {
   try {
-    return !!(await Artist.findByIdAndDelete(id));
+    const artist = await Artist.findById(id)
+    if (!artist) return null
+    await Artist.deleteOne({_id: artist._id})
+    return true
   } catch (err) {
     console.error("Unable to delete 'Artist'", err)
     return false

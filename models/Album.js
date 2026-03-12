@@ -10,6 +10,12 @@ const albumSchema = new mongoose.Schema({
   releaseDate: { type: Date, required: true },
 }, { timestamps: true });
 
+albumSchema.pre("deleteOne", 
+  {document: true}, 
+  async function (doc) {
+    console.log("DOcument",doc)
+})
+
 const Album = mongoose.model("Album", albumSchema);
 
 export default Album;

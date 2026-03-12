@@ -1,11 +1,13 @@
 import Artist from "../models/Artist.js";
 import Album from "../models/Album.js";
 import Song from "../models/Song.js";
+import Playlist from "../models/Playlist.js";
 import { connectToDb, disconnectFromDb } from "../config/db.js";
 
 async function teardown() {
     await connectToDb("sqotifyv2");
-    await Song.deleteMany();   // Clear songs before artists
+    await Playlist.deleteMany();  // Playlists first (reference songs)
+    await Song.deleteMany();
     await Album.deleteMany();
     await Artist.deleteMany();
     console.info("Database cleared");

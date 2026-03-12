@@ -13,6 +13,8 @@
       <button data-section="artists" class="active">Artists</button>
       <button data-section="songs">Songs</button>
       <button data-section="albums">Albums</button>
+      <button data-section="playlists">Playlists</button>
+      <a href="/auth/register" class="nav-link">Register</a>
     </nav>
   </header>
 
@@ -39,6 +41,14 @@
         <button id="album-add">Add album</button>
       </div>
       <div id="albums-list" class="list"></div>
+    </section>
+
+    <section id="playlists" class="panel">
+      <div class="toolbar">
+        <input type="search" id="playlists-search" placeholder="Search playlists…">
+        <button id="playlist-add">Add playlist</button>
+      </div>
+      <div id="playlists-list" class="list"></div>
     </section>
   </main>
 

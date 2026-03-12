@@ -280,6 +280,143 @@ async function openAlbumModal(id = null) {
   qs("#modal").classList.remove("hidden");
 }
 
+// Playlists
+async function loadPlaylists(q = "") {
+  const url = q ? `${API}/playlists?q=${encodeURIComponent(q)}` : `${API}/playlists`;
+  const data = await fetchJson(url);
+  const list = qs("#playlists-list");
+  list.innerHTML = data.length
+    ? data
+        .map(
+          (p) => {
+            const count = p.songs?.length ?? 0;
+            const meta = p.description ? `${count} songs · ${escapeHtml(p.description)}` : `${count} songs`;
+            return `
+    <div class="item playlist-item" data-id="${p._id}">
+      <div class="playlist-header" data-id="${p._id}">
+        <div class="item-info" data-id="${p._id}">
+          <span class="expand-icon">▸</span>
+          <div>
+            <p class="item-title">${escapeHtml(p.name)}</p>
+            <p class="item-meta">${meta}</p>
+          </div>
+        </div>
+        <div class="item-actions">
+          <button class="add-song" data-id="${p._id}">Add song</button>
+          <button class="delete" data-id="${p._id}">Delete</button>
+        </div>
+      </div>
+      <div class="playlist-songs" data-id="${p._id}" hidden></div>
+    </div>`;
+          }
+        )
+        .join("")
+    : '<p class="item-meta">No playlists</p>';
+
+  list.querySelectorAll(".playlist-header").forEach((el) => {
+    const id = el.closest(".playlist-item")?.dataset.id;
+    if (id) {
+      el.addEventListener("click", (e) => {
+        if (e.target.closest(".item-actions")) return;
+        togglePlaylistExpand(id);
+      });
+    }
+  });
+  list.querySelectorAll(".add-song").forEach((b) =>
+    b.addEventListener("click", (e) => { e.stopPropagation(); openAddSongModal(b.dataset.id); })
+  );
+  list.querySelectorAll(".delete").forEach((b) =>
+    b.addEventListener("click", (e) => { e.stopPropagation(); deletePlaylist(b.dataset.id); })
+  );
+}
+
+async function togglePlaylistExpand(id) {
+  const item = qs(`.playlist-item[data-id="${id}"]`);
+  const songsEl = qs(`.playlist-songs[data-id="${id}"]`);
+  const icon = qs(".expand-icon", item);
+  const isExpanded = !songsEl.hidden;
+
+  if (isExpanded) {
+    songsEl.hidden = true;
+    icon.textContent = "▸";
+  } else {
+    icon.textContent = "▾";
+    songsEl.hidden = false;
+    if (!songsEl.innerHTML) {
+      songsEl.innerHTML = '<p class="item-meta">Loading…</p>';
+      const playlist = await fetchJson(`${API}/playlists/${id}`);
+      const songs = playlist.songs ?? [];
+      songsEl.innerHTML = songs.length
+        ? songs.map((s) => {
+            const artist = songArtistName(s);
+            const label = artist ? `${s.title} · ${artist}` : s.title;
+            return `<p class="playlist-song">${escapeHtml(label)}</p>`;
+          }).join("")
+        : '<p class="item-meta">No songs yet</p>';
+    }
+  }
+}
+
+async function deletePlaylist(id) {
+  if (!confirm("Delete this playlist?")) return;
+  await fetchJson(`${API}/playlists/${id}`, { method: "DELETE" });
+  loadPlaylists(qs("#playlists-search").value);
+}
+
+function openPlaylistModal() {
+  qs("#modal-title").textContent = "Add playlist";
+  qs("#modal-form").innerHTML = `
+    <label>Name</label>
+    <input name="name" required placeholder="Playlist name" />
+    <label>Description (optional)</label>
+    <input name="description" placeholder="Description" />
+  `;
+  const form = qs("#modal-form");
+  form.onsubmit = async (e) => {
+    e.preventDefault();
+    const fd = new FormData(form);
+    await fetchJson(`${API}/playlists`, {
+      method: "POST",
+      body: JSON.stringify({ name: fd.get("name"), description: fd.get("description") || "" }),
+    });
+    closeModal();
+    loadPlaylists(qs("#playlists-search").value);
+  };
+  qs("#modal").classList.remove("hidden");
+}
+
+async function openAddSongModal(playlistId) {
+  const [playlist, songs] = await Promise.all([
+    fetchJson(`${API}/playlists/${playlistId}`),
+    fetchJson(`${API}/songs`),
+  ]);
+  const songOpts = songs
+    .filter((s) => !playlist.songs?.some((sp) => (sp._id ?? sp) === s._id))
+    .map((s) => `<option value="${s._id}">${escapeHtml(s.title)} · ${escapeHtml(songArtistName(s))}</option>`)
+    .join("");
+  if (!songOpts) {
+    alert("No more songs to add, or all songs are already in this playlist.");
+    return;
+  }
+  qs("#modal-title").textContent = `Add song to ${escapeHtml(playlist.name)}`;
+  qs("#modal-form").innerHTML = `
+    <label>Song</label>
+    <select name="song" required><option value="">Select song</option>${songOpts}</select>
+  `;
+  const form = qs("#modal-form");
+  form.onsubmit = async (e) => {
+    e.preventDefault();
+    const songId = new FormData(form).get("song");
+    await fetchJson(`${API}/playlists/${playlistId}/add-song`, {
+      method: "POST",
+      body: JSON.stringify({ song: songId }),
+    });
+    closeModal();
+    loadPlaylists(qs("#playlists-search").value);
+  };
+  qs("#modal").classList.remove("hidden");
+}
+
 function formatDate(s) {
   if (!s) return "";
   const d = new Date(s);
@@ -301,6 +438,7 @@ function loadSection(section) {
   if (section === "artists") loadArtists(q);
   if (section === "songs") loadSongs(q);
   if (section === "albums") loadAlbums(q);
+  if (section === "playlists") loadPlaylists(q);
 }
 
 // Init
@@ -314,10 +452,12 @@ function init() {
   qs("#artists-search").addEventListener("input", debounce(() => loadArtists(qs("#artists-search").value), 300));
   qs("#songs-search").addEventListener("input", debounce(() => loadSongs(qs("#songs-search").value), 300));
   qs("#albums-search").addEventListener("input", debounce(() => loadAlbums(qs("#albums-search").value), 300));
+  qs("#playlists-search").addEventListener("input", debounce(() => loadPlaylists(qs("#playlists-search").value), 300));
 
   qs("#artist-add").addEventListener("click", () => openArtistModal());
   qs("#song-add").addEventListener("click", () => openSongModal());
   qs("#album-add").addEventListener("click", () => openAlbumModal());
+  qs("#playlist-add").addEventListener("click", () => openPlaylistModal());
 
   loadArtists();
 }

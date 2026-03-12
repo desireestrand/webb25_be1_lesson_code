@@ -1,0 +1,36 @@
+[
+  {
+    "_id": "69a89a001b396e2d9ab8c700",
+    "name": "Bad Bunny Faves",
+    "description": "Best of Bad Bunny",
+    "songs": [
+      "69a896ef1b396e2d9ab8c644",
+      "69a896ef1b396e2d9ab8c645",
+      "69a896ef1b396e2d9ab8c647",
+      "69a896ef1b396e2d9ab8c64a",
+      "69a896ef1b396e2d9ab8c64b",
+      "69a896ef1b396e2d9ab8c65e",
+      "69a896ef1b396e2d9ab8c65f"
+    ]
+  },
+  {
+    "_id": "69a89a001b396e2d9ab8c701",
+    "name": "Radiohead Classics",
+    "description": "Essential Radiohead",
+    "songs": [
+      "69a896ef1b396e2d9ab8c651",
+      "69a896ef1b396e2d9ab8c658"
+    ]
+  },
+  {
+    "_id": "69a89a001b396e2d9ab8c702",
+    "name": "Chill Mix",
+    "description": "Relaxing vibes",
+    "songs": [
+      "69a896ef1b396e2d9ab8c64f",
+      "69a896ef1b396e2d9ab8c650",
+      "69a896ef1b396e2d9ab8c656",
+      "69a896ef1b396e2d9ab8c66a"
+    ]
+  }
+]

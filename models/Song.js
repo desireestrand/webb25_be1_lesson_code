@@ -13,6 +13,11 @@ const songSchema = new mongoose.Schema(
       ref: "Album",
       required: false,
     },
+    length: {
+      type: Number,
+      default: 0,
+      min: 0
+    }
   },
   {
     timestamps: true,

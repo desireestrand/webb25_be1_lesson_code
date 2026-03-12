@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register · Sqotify</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <a href="/" class="logo">Sqotify</a>
+      <nav>
+        <a href="/auth/register">Register</a>
+      </nav>
+    </header>
+
+    <main class="auth-page">
+      <h1>Create account</h1>
+      <form id="register-form" class="auth-form">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          placeholder="Your name"
+          autocomplete="name"
+        />
+
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          placeholder="you@example.com"
+          autocomplete="email"
+        />
+
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          required
+          placeholder="••••••••"
+          autocomplete="new-password"
+          minlength="6"
+        />
+
+        <label for="confirm">Confirm password</label>
+        <input
+          type="password"
+          id="confirm"
+          name="confirm"
+          required
+          placeholder="••••••••"
+          autocomplete="new-password"
+          minlength="6"
+        />
+
+        <button type="button" id="register-btn">Register</button>
+      </form>
+      <p class="auth-meta">
+        Already have an account? <a href="/">Back to app</a>
+      </p>
+    </main>
+
+    <script>
+      const btn = document.getElementById("register-btn");
+      if (!btn) {
+        document.body.insertAdjacentHTML("beforeend", "<p style='color:red'>register-btn not found</p>");
+      } else {
+        btn.addEventListener("click", async () => {
+        console.log("Register button clicked");
+        const form = document.getElementById("register-form");
+        if (!form.reportValidity()) {
+          console.log("Form invalid");
+          return;
+        }
+        const password = form.password.value;
+        const confirmVal = form.confirm.value;
+        if (password !== confirmVal) {
+          alert("Passwords do not match");
+          return;
+        }
+        const body = {
+          name: form.name.value,
+          email: form.email.value,
+          password: form.password.value,
+        };
+        alert(JSON.stringify(body, null, 2));
+        const url = "/api/auth/register";
+        try {
+          const res = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+          });
+          if (!res.ok) {
+            const err = await res.json().catch(() => ({ message: res.statusText }));
+            alert(err.message || "Registration failed (check Network tab – request was sent)");
+            return;
+          }
+          const data = await res.json();
+          console.log("Registered:", data);
+        } catch (err) {
+          console.error(err);
+          alert("Request failed – " + err.message);
+        }
+      });
+      }
+    </script>
+  </body>
+</html>

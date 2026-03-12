@@ -1,4 +1,5 @@
 import Album from "../models/Album.js";
+import { getFullTextSearch } from "../utils/fullTextSearch.js";
 
 export async function getAllAlbums(q) {
   let filter = { }
@@ -45,9 +46,12 @@ export async function updateAlbum(id, data) {
 
 export async function deleteAlbum(id) {
   try {
-    return await Album.findByIdAndDelete(id);
+    const album = await Album.findById(id)
+    if (!album) return null
+    await album.deleteOne()
+    return true
   } catch (err) {
     console.error("Unable to delete 'Album'", err)
-    return null
+    return false
   }
 }
