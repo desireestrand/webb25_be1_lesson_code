@@ -35,16 +35,17 @@ userSchema.pre("save", async function() {
 
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(this.password, salt)
-    console.log("Password: ", this.password)
-    console.log("Hashed password: ", hashedPassword)
-    const isSame = await bcrypt.compare(this.password, hashedPassword)
-    console.log("is same", isSame)
-    const isNotSame = await bcrypt.compare(this.password.toUpperCase(), hashedPassword)
-    console.log("is not same", isNotSame)
-
     this.password = hashedPassword
-
 })
+
+userSchema.pre("save", async function() {
+    if(!this.isModified("email")) return
+    this.email = this.email.toLowerCase()
+})
+
+userSchema.methods.isSamePassword = async function (password){
+    return await bcrypt.compare(password, this.password)
+}
 
 const User = mongoose.model("User", userSchema)
 
