@@ -19,7 +19,8 @@ export async function getAllPlaylists(q) {
 
 export async function getPlaylistByid(id) {
   try {
-    return await Playlist.findById(id).populate({ path: "songs", populate: [
+    return await Playlist.findById(id)
+      .populate({ path: "songs", populate: [
     { path: "artist", select: "name" },
     { path: "album", select: "title" }
   ] });

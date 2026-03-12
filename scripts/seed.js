@@ -30,7 +30,7 @@ async function seedAlbums() {
 async function seedSongs() {
     if ((await Song.countDocuments()) > 0) return;
     const songsFromFile = JSON.parse(await readFile(SONGS_PATH, "utf8"));
-    const toInsert = songsFromFile.map(s => ({ _id: s._id, title: s.title, artist: s.artist, album: s.album || null }));
+    const toInsert = songsFromFile.map(s => ({ _id: s._id, title: s.title, artist: s.artist, album: s.album || null, length: s.length ?? 120 }));
     await Song.insertMany(toInsert);
     console.info("Songs seeded");
 }
