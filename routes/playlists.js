@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { getAllPlaylists, getPlaylistByid, createPlaylist, deletePlaylist, addSongToPlaylist } from "../db/playlists.js"
+import { getAllPlaylists, getPlaylistByid, createPlaylist, deletePlaylist, addSongToPlaylist, removeSongFromPlaylist } from "../db/playlists.js"
 const playlistRouter = Router()
 
 playlistRouter.get("/", async (req, res) => {
@@ -41,6 +41,20 @@ playlistRouter.post("/:id/add-song", async (req, res) =>  {
     }
   const playlist = await addSongToPlaylist(id, song)
   return res.json(playlist)
+})
+
+playlistRouter.post("/:id/remove-song", async (req, res) => {
+  const {id} = req.params
+  const {song} = req.body
+   if (!song) {
+        return res.status(400).json({
+            message: "Song is required",
+        })
+    }
+  await removeSongFromPlaylist(id, song)
+  return res.json({
+    message: "Song removed"
+  })
 })
 
 playlistRouter.delete("/:id", async (req, res) => {
