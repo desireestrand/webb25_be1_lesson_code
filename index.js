@@ -7,6 +7,8 @@ import artistRouter from "./routes/artists.js"
 import songRouter from "./routes/songs.js"
 import albumRouter from "./routes/albums.js"
 import playlistRouter from "./routes/playlists.js";
+import authRouter from "./routes/auth.js";
+
 
 dotenv.config();
 
@@ -19,15 +21,13 @@ app.get("/api/health", (req, res) => {
     return res.json({ message: "Healthy?" })
 })
 
-// Stub: receives register request (no logic yet)
-app.post("/api/auth/register", (req, res) => {
-    res.status(501).json({ message: "Not implemented" })
-})
 
-app.get("/auth/register", (req, res) => {
+
+app.get("/register", (req, res) => {
     res.sendFile("auth/register.html", { root: "frontend" })
 })
 
+app.use("/auth", authRouter)
 app.use("/api/artists", artistRouter)
 app.use("/api/songs", songRouter)
 app.use("/api/albums", albumRouter)
