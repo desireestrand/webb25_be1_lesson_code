@@ -1,6 +1,6 @@
 import { Router } from "express";
-import User from "../models/User.js";
-import { generateAccessToken, generateRefreshToken, verifyAccessToken, verifyRefreshToken } from "../utils/tokens.js";
+import { verifyAccessToken, verifyRefreshToken } from "../utils/tokens.js";
+import { getUserById, registerUser, loginUser, refreshAccessToken } from "../db/auth.js";
 
 const authRouter = Router();
 
@@ -14,22 +14,12 @@ authRouter.post("/register", async (req, res) => {
   }
 
   try {
-    const registeredUser = new User({
-      name,
-      email,
-      password,
-    });
-    await registeredUser.save();
-    const userObj = registeredUser.toObject();
-    delete userObj.password;
-
-    const accessToken = generateAccessToken(registeredUser.id)
-    const refreshToken = generateRefreshToken(registeredUser.id)
+    const { user, accessToken, refreshToken } = await registerUser(name, email, password);
 
     return res.status(201).json({
-      accessToken: accessToken,
-      refreshToken: refreshToken,
-      user: userObj
+      user,
+      accessToken,
+      refreshToken
     });
   } catch (err) {
     const emailError = err?.errors?.email?.message;
@@ -64,25 +54,12 @@ authRouter.post("/login", async (req, res) => {
   }
 
   try {
-    const user = await User.findOne({ email: email }).select("+password");
+    const { user, accessToken, refreshToken } = await loginUser(email, password);
 
-    if (!user) {
-      throw new Error("Invalid credentials");
-    }
-
-    const isSamePassword = await user.isSamePassword(password);
-
-    if (!isSamePassword) {
-      throw new Error("Invalid credentials");
-    }
-    const accessToken = generateAccessToken(user.id)
-    const refreshToken = generateRefreshToken(user.id)
-    const userObj = user.toObject();
-    delete userObj.password;
     return res.json({
-      accessToken: accessToken,
-      refreshToken: refreshToken,
-      user: userObj
+      user,
+      accessToken,
+      refreshToken
     });
   } catch (err) {
     console.log("error in login", err);
@@ -128,7 +105,7 @@ authRouter.get("/me", async (req, res) => {
 
   try {
 
-    const user = await User.findById(userId)
+    const user = await getUserById(userId)
     if(!user) {
       throw new Error()
     }
@@ -153,9 +130,9 @@ authRouter.post("/refresh", async (req, res) => {
     if (!userId) {
       throw new Error()
     }
-    const accessToken = generateAccessToken(userId)
+    const { accessToken } = await refreshAccessToken(refreshToken)
     return res.json({
-      access: accessToken
+      accessToken
     })
   } catch (err) {
     return res.status(401).json({
