@@ -10,6 +10,11 @@ const playlistSchema = new mongoose.Schema(
         ref: "Song",
       },
     ],
+    user: {
+      type: mongoose.SchemaTypes.ObjectId,
+      required: false,
+      ref: "User"
+    }
   },
   {
     timestamps: true,

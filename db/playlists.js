@@ -39,9 +39,12 @@ export async function createPlaylist(data) {
   }
 }
 
-export async function addSongToPlaylist(id, song) {
+export async function addSongToPlaylist(id, user, song) {
   try {
-    const updatedPlaylist = await Playlist.findByIdAndUpdate(id, {
+    const updatedPlaylist = await Playlist.findOneAndUpdate({
+      _id: id,
+      user: user
+    }, {
       $addToSet: {
         songs: song
       }
@@ -61,9 +64,12 @@ export async function addSongToPlaylist(id, song) {
   }
 }
 
-export async function removeSongFromPlaylist(id, song) {
+export async function removeSongFromPlaylist(id, user, song) {
   try {
-    const updatedPlaylist = await Playlist.findByIdAndUpdate(id, {
+    const updatedPlaylist = await Playlist.findOneAndUpdate({
+      _id: id,
+      user: user
+    }, {
       $pull: {
         songs: song
       }
@@ -83,10 +89,13 @@ export async function removeSongFromPlaylist(id, song) {
   }
 }
 
-export async function deletePlaylist(id) {
+export async function deletePlaylist(id, user) {
   try {
-    const playlist = await Playlist.findById(id)
-    if (!playlist) return null
+    const playlist = await Playlist.findOne({
+      _id: id,
+      user: user
+    })
+    if (!playlist) return false
     await playlist.deleteOne()
     return true
   } catch (err) {

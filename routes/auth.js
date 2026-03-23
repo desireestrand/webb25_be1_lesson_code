@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { verifyAccessToken, verifyRefreshToken } from "../utils/tokens.js";
 import { getUserById, registerUser, loginUser, refreshAccessToken, requestPassword, confirmPasswordReset } from "../db/auth.js";
+import { requireAuth } from "../middlewares/auth.js";
 
 const authRouter = Router();
 
@@ -69,39 +70,9 @@ authRouter.post("/login", async (req, res) => {
   }
 });
 
-authRouter.get("/me", async (req, res) => {
+authRouter.get("/me", requireAuth, async (req, res) => {
 
-  let userId = null;
-  try {
-
-    const header = req.headers?.authorization;
-    if(!header) {
-      throw new Error()
-    }
-    const token = header.split(" ")?.[1]
-    if(!token) {
-      throw new Error()
-    }
-    
-    const decodedToken = verifyAccessToken(token)
-    console.log(decodedToken)
-    userId = decodedToken?.userId
-
-    if(!userId) {
-      throw new Error()
-    }
-
-  } catch (err) {
-    console.log(err.message)
-    if(err?.message?.includes("expired")) {
-      return res.status(401).json({
-      message: "Unauthorized - Expired"
-    })
-    }
-    return res.status(401).json({
-      message: "Unauthorized"
-    })
-  }
+  let userId = req.userId
 
   try {
 

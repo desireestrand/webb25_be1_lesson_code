@@ -16,7 +16,7 @@ export function generateAccessToken(userId) {
 }
 
 export function verifyAccessToken(token) {
-    return jwt.verify(token, JWT_ACCESS_SECRET) || null
+    return jwt.verify(token, JWT_ACCESS_SECRET)
 }
 
 export function generateRefreshToken(userId) {

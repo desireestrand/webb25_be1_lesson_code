@@ -1,5 +1,6 @@
 import { Router } from "express"
 import { getAllPlaylists, getPlaylistByid, createPlaylist, deletePlaylist, addSongToPlaylist, removeSongFromPlaylist } from "../db/playlists.js"
+import { requireAuth } from "../middlewares/auth.js"
 const playlistRouter = Router()
 
 playlistRouter.get("/", async (req, res) => {
@@ -14,8 +15,8 @@ playlistRouter.get("/:id", async (req, res) => {
   return res.json(playlist)
 })
 
-playlistRouter.post("/", async (req, res) => {
-    const { name, songs, description } = req.body
+playlistRouter.post("/", requireAuth, async (req, res) => {
+    const { name, songs, description, } = req.body
     const hasName = name && typeof name === "string"
     let _songs = songs?.length ? songs : []
     if (!hasName) {
@@ -26,12 +27,13 @@ playlistRouter.post("/", async (req, res) => {
     const playlist = await createPlaylist({
       name,
       description,
-      songs: _songs
+      songs: _songs,
+      user: req.userId
   })
   return res.json(playlist)
 })
 
-playlistRouter.post("/:id/add-song", async (req, res) =>  {
+playlistRouter.post("/:id/add-song", requireAuth, async (req, res) =>  {
   const {id} = req.params
   const {song} = req.body
    if (!song) {
@@ -39,11 +41,16 @@ playlistRouter.post("/:id/add-song", async (req, res) =>  {
             message: "Song is required",
         })
     }
-  const playlist = await addSongToPlaylist(id, song)
+  const playlist = await addSongToPlaylist(id, req.userId, song)
+  if(!playlist) {
+    return res.status(404).json({
+      message: "Playlist does not exist or you dont have permission to change it"
+    })
+  }
   return res.json(playlist)
 })
 
-playlistRouter.post("/:id/remove-song", async (req, res) => {
+playlistRouter.post("/:id/remove-song", requireAuth, async (req, res) => {
   const {id} = req.params
   const {song} = req.body
    if (!song) {
@@ -51,20 +58,25 @@ playlistRouter.post("/:id/remove-song", async (req, res) => {
             message: "Song is required",
         })
     }
-  await removeSongFromPlaylist(id, song)
+  const playlist  = await removeSongFromPlaylist(id, req.userId, song)
+  if(!playlist) {
+    return res.status(404).json({
+      message: "Playlist does not exist or you dont have permission to change it"
+    })
+  }
   return res.json({
     message: "Song removed"
   })
 })
 
-playlistRouter.delete("/:id", async (req, res) => {
+playlistRouter.delete("/:id", requireAuth, async (req, res) => {
   const { id } = req.params
-    const playlist = await deletePlaylist(id)
-    if (!playlist) {
-        return res.status(404).json({
-            message: "Playlist does not exist",
-        })
-    }
+    const playlist = await deletePlaylist(id, req.userId)
+    if(!playlist) {
+    return res.status(404).json({
+      message: "Playlist does not exist or you dont have permission to change it"
+    })
+  }
     return res.status(204).json()
 })
 
