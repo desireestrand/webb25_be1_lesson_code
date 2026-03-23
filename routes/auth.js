@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { verifyAccessToken, verifyRefreshToken } from "../utils/tokens.js";
-import { getUserById, registerUser, loginUser, refreshAccessToken } from "../db/auth.js";
+import { getUserById, registerUser, loginUser, refreshAccessToken, requestPassword, confirmPasswordReset } from "../db/auth.js";
 
 const authRouter = Router();
 
@@ -140,4 +140,42 @@ authRouter.post("/refresh", async (req, res) => {
     })
   }
 })
+
+authRouter.post("/reset-password/request", async (req, res) => {
+  const { email } = req.body
+  if(!email) {
+    return res.status(400).json({
+      message: "Email is required",
+    });
+  }
+  const result = await requestPassword(email)
+
+  return res.json(result)
+
+})
+
+authRouter.patch("/reset-password/confirm", async (req, res) => {
+  const {email, code} = req.query
+  const {password} = req.body
+  if(!email || !code) {
+    return res.status(400).json({
+      message: "Email and Code query params is required",
+    });
+  }
+  if(!password) {
+    return res.status(400).json({
+      message: "Password is required",
+    });
+  }
+
+  try {
+    const result = await confirmPasswordReset(email, code, password)
+    return res.json(result)
+  } catch (error) {
+    return res.status(401).json({
+      message: "Unable to reset password"
+    })
+  }
+})
+
 export default authRouter;

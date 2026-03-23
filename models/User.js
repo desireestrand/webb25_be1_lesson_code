@@ -25,6 +25,11 @@ const userSchema = new mongoose.Schema({
         trim: true,
         minLength: 6,
         select: false
+    },
+    resetPasswordCode: {
+        type: String,
+        required: false,
+        default: null,
     }
 }, {
     timestamps: true
