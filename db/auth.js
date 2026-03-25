@@ -5,9 +5,9 @@ import {
   verifyRefreshToken,
 } from "../utils/tokens.js";
 
-function _generateTokens(userId) {
-  const accessToken = generateAccessToken(userId);
-  const refreshToken = generateRefreshToken(userId);
+function _generateTokens(user) {
+  const accessToken = generateAccessToken(user);
+  const refreshToken = generateRefreshToken(user);
   return { accessToken, refreshToken };
 }
 
@@ -20,7 +20,7 @@ function _getUserObject(user) {
 export async function registerUser(name, email, password) {
   const newUser = new User({ name, email, password });
   await newUser.save();
-  const { accessToken, refreshToken } = _generateTokens(newUser.id);
+  const { accessToken, refreshToken } = _generateTokens(newUser);
 
   const userObject = _getUserObject(newUser);
 
@@ -41,7 +41,7 @@ export async function loginUser(email, password) {
   if (!isSamePassword) {
     throw new Error("Invalid credentials");
   }
-  const { accessToken, refreshToken } = _generateTokens(user.id);
+  const { accessToken, refreshToken } = _generateTokens(user);
 
   const userObject = _getUserObject(user);
 

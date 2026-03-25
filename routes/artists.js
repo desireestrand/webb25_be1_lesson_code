@@ -6,6 +6,7 @@ import {
   updateArtist,
   deleteArtist,
 } from "../db/artists.js"
+import { requireAdmin, requireAuth } from "../middlewares/auth.js"
 const artistRouter = Router()
 
 artistRouter.get("/", async (req, res) => {
@@ -25,7 +26,7 @@ artistRouter.get("/:id", async (req, res) => {
   return res.json(artist)
 })
 
-artistRouter.post("/", async (req, res) => {
+artistRouter.post("/", requireAuth, requireAdmin, async (req, res) => {
   const { name } = req.body
   const hasName = name && typeof name === "string"
   if (!hasName) {
@@ -44,7 +45,7 @@ artistRouter.post("/", async (req, res) => {
   return res.status(201).json(artist)
 })
 
-artistRouter.put("/:id", async (req, res) => {
+artistRouter.put("/:id", requireAuth, requireAdmin, async (req, res) => {
   const id = req.params.id
   const { name } = req.body
 
@@ -64,7 +65,7 @@ artistRouter.put("/:id", async (req, res) => {
   return res.status(200).json(updatedArtist)
 })
 
-artistRouter.delete("/:id", async (req, res) => {
+artistRouter.delete("/:id", requireAuth, requireAdmin, async (req, res) => {
   const id = req.params.id
 
   const deleted = await deleteArtist(id)
