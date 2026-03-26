@@ -1,7 +1,6 @@
 import { verifyAccessToken } from "../utils/tokens.js";
 
 export function requireAuth(req, res, next) {
-
   try {
     const header = req.headers?.authorization;
     const token = header?.split(" ")?.[1];
