@@ -3,7 +3,9 @@ import slugify from "slugify";
 
 const artistSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true, unique: true },
-  slug: {type: String, required: false, trim: true, unique: true}
+  slug: {type: String, required: false, trim: true, unique: true},
+  bio: { type: String, required: false},
+  image: { type: String, required: false},
 }, { timestamps: true });
 
 // Add text index for name field for full-text search
